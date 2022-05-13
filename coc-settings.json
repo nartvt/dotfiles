@@ -3,13 +3,19 @@
 		"golang": {
 			"enable": true,
 			"formatterPriority": 0,
-			"command": "gopls",
 			"rootPatterns": [
-				"go.mod"
+				"go.mod",
+				".vim/",
+				".git/",
+				".hg/"
 			],
+			"command": "gopls",
 			"trace.server": "verbose",
 			"filetypes": [
-				"go"
+				"go",
+				"javascript",
+				"typescript",
+				"json"
 			]
 		}
 	},
@@ -21,13 +27,16 @@
 	"diagnostic.hintSign": "➤",
 	"diagnostic.enableHighlightLineNumber": true,
 	"coc.source.file.enable": true,
+	"coc.source.file.trimSameExts": [
+		".ts",
+		".js",
+		".go"
+	],
 	"coc.preferences.formatOnType": true,
 	"coc.source.around.enable": true,
 	"coc.preferences.formatOnSaveFiletypes": [
 		"dart",
-		"java",
 		"go",
-		"python",
 		"rust",
 		"markdown",
 		"javascript",
@@ -35,6 +44,7 @@
 		"json",
 		"jsonc"
 	],
+	"suggest.autoTrigger": "trigger",
 	"suggest.triggerCompletionWait": 50,
 	"suggest.removeDuplicateItems": true,
 	"suggest.enablePreview": true,

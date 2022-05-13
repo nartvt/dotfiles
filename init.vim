@@ -61,6 +61,7 @@ set updatetime=500
 set timeoutlen=500
 set mmp=500
 set number
+set relativenumber
 
 " Encoding                                                                                                                                                                                                                                                                           s
 set encoding=utf-8                                                                                                                                                                                                                                                                    
@@ -77,6 +78,8 @@ let g:floaterm_autoclose=1
 let g:floaterm_completeoptPreview=1
 " gitgutter                                                                                                                                                                                                          
 " un map all keys bindings of gitgutter then will map it again                                                                                                                                                       
+let g:coc_config_home = '/Users/nartvt/.config/nvim'
+
 let g:gitgutter_map_keys = 0
 " gitgutter                                                                                                                                                                                                      
 let g:gitgutter_preview_win_floating = 1
@@ -94,7 +97,7 @@ nnoremap <silent> <leader>gg :LazyGit<CR>
 "let g:lsc_reference_highlights = v:false
 "let g:lsc_trace_level          = 'on'
 let g:go_def_mode = 'gopls'
-
+let g:go_info_mode='gopls'
 
 let g:go_highlight_structs = 1
 let g:go_highlight_methods = 1
@@ -187,6 +190,7 @@ nmap <leader>w <C-w>w
 nmap <leader>t gt
 nmap <leader>t :vs<CR><C-w>w:terminal<CR>i
 nmap <silent> <leader>m :History<CR>
+nmap <silent> <leader>c :clear<CR>
 nmap <leader>f :Ag<CR>
 nmap <silent> <Space><Space> :noh<CR>
 "nmap <leader>d :LSClientEnable<CR>:lopen<CR>
