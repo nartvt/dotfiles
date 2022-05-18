@@ -186,11 +186,7 @@ nnoremap <silent><leader>b :Buffers<CR>
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <C-p> :FZF!<CR>
 nmap <Space> <kDivide>
-nmap <leader>w <C-w>w
-nmap <leader>t gt
-nmap <leader>t :vs<CR><C-w>w:terminal<CR>i
 nmap <silent> <leader>m :History<CR>
-nmap <silent> <leader>c :clear<CR>
 nmap <leader>f :Ag<CR>
 nmap <silent> <Space><Space> :noh<CR>
 "nmap <leader>d :LSClientEnable<CR>:lopen<CR>
