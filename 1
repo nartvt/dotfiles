@@ -11,7 +11,7 @@ Plug 'scrooloose/nerdTree'
 Plug 'sainnhe/gruvbox-material'
 Plug 'arcticicestudio/nord-vim'
 Plug 'gruvbox-community/gruvbox'
-" Plug 'dart-lang/dart-vim-plugin'
+Plug 'dart-lang/dart-vim-plugin'
 
 Plug 'natebosch/vim-lsc', {'tag': 'v0.4.0'}
 Plug 'natebosch/vim-lsc-dart'
@@ -41,10 +41,18 @@ Plug 'voldikss/vim-floaterm'
 Plug 'vim-airline/vim-airline'
 
 "Plug 'neovim/nvim-lspconfig'
-"Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+"Plug 'neovim/nvim-lspconfig'
+
 " Markdown 
-"Plug 'davidgranstrom/nvim-markdown-preview'
+Plug 'davidgranstrom/nvim-markdown-preview'
+"Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+" Plug 'iamcco/markdown-preview.nvim' 
+" :source %
+" :PluginInstall
+" :call mkdp#util#install()
 call plug#end()
+
+"lua require'lspconfig'.erlangls.setup{}
 
 " BASIC
 let mapleader=" "
@@ -56,7 +64,11 @@ set updatetime=500
 set timeoutlen=500
 set mmp=500
 set number
-set relativenumber
+set guifont=*
+
+"let g:airline_powerline_fonts = 1
+"let g:airline_theme='codedark'
+"let g:codedark_conservative = 1
 
 " Encoding                                                                                                                                                                                                                                                                           s
 set encoding=utf-8                                                                                                                                                                                                                                                                    
@@ -73,8 +85,6 @@ let g:floaterm_autoclose=1
 let g:floaterm_completeoptPreview=1
 " gitgutter                                                                                                                                                                                                          
 " un map all keys bindings of gitgutter then will map it again                                                                                                                                                       
-let g:coc_config_home = '/Users/nartvt/.config/nvim'
-
 let g:gitgutter_map_keys = 0
 " gitgutter                                                                                                                                                                                                      
 let g:gitgutter_preview_win_floating = 1
@@ -92,7 +102,7 @@ nnoremap <silent> <leader>gg :LazyGit<CR>
 "let g:lsc_reference_highlights = v:false
 "let g:lsc_trace_level          = 'on'
 let g:go_def_mode = 'gopls'
-let g:go_info_mode='gopls'
+
 
 let g:go_highlight_structs = 1
 let g:go_highlight_methods = 1
@@ -111,10 +121,10 @@ set clipboard+=unnamedplus
 " GOLANG
 let g:go_fmt_command = "goimports"
 let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-" let g:go_def_mode = "godef"
+"let g:go_def_mode = "godef"
 if !exists("autocommands_loaded")
-  let autocommands_loaded = 1
-  echo "writtern file"
+	let autocommands_loaded = 1 
+  	echo "writtern file"
   autocmd BufWritePost *.go :GoBuild
 endif
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
@@ -181,6 +191,9 @@ nnoremap <silent><leader>b :Buffers<CR>
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <C-p> :FZF!<CR>
 nmap <Space> <kDivide>
+nmap <leader>w <C-w>w
+nmap <leader>t gt
+nmap <leader>t :vs<CR><C-w>w:terminal<CR>i
 nmap <silent> <leader>m :History<CR>
 nmap <leader>f :Ag<CR>
 nmap <silent> <Space><Space> :noh<CR>
@@ -198,6 +211,8 @@ nnoremap <C-l> <C-w>l
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
+inoremap <leader>q <C-\><C-n>:q!<CR>
+
 nmap <silent><leader>tg :TigBlame<CR>
 " MAP COC
 nmap <silent> gd <Plug>(coc-definition)
@@ -211,12 +226,16 @@ nmap <silent> gr <Plug>(coc-references)
 "nnoremap <silent> gd <Plug><cmd>lua vim.lsp.buf.definition()<CR>
 " nnoremap <silent> gy <Plug><cmd>lua vim.lsp.buf.declaration()<CR>
 " nnoremap <silent> gr <Plug><cmd>lua vim.lsp.buf.references()<CR>
-" MARKDOWN PREVIEWS
-" END of markdown
+autocmd FileType markdown MarkdownPreview
+let g:nvim_markdown_preview_theme = 'solarized-light'
+let g:nvim_markdown_preview_format = 'markdown'
+
+nmap <silent> mp :MarkdownPreview<CR>
+
+" end of markdown
 
 " MAP LSP 
 
-nmap <leader>so :so %<CR>
 let g:gruvbox_contrast_dark = 'soft'
 
 color gruvbox
