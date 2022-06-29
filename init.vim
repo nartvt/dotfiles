@@ -11,7 +11,7 @@ Plug 'scrooloose/nerdTree'
 Plug 'sainnhe/gruvbox-material'
 Plug 'arcticicestudio/nord-vim'
 Plug 'gruvbox-community/gruvbox'
-" Plug 'dart-lang/dart-vim-plugin'
+Plug 'dart-lang/dart-vim-plugin'
 
 Plug 'natebosch/vim-lsc', {'tag': 'v0.4.0'}
 Plug 'natebosch/vim-lsc-dart'
@@ -25,11 +25,8 @@ Plug 'tpope/vim-fugitive', {'branch': 'master'}
 "--- tig blame
 Plug 'crusoexia/vim-monokai'
 Plug 'tveskag/nvim-blame-line'
-"Plug 'iberianpig/tig-explorer.vim', {'branch': 'master'}
 " vim-plug
 Plug 'iberianpig/tig-explorer.vim'
-" NeoBundle
-"NeoBundle 'iberianpig/tig-explorer.vim'
 " vim-plug
 Plug 'rbgrouleff/bclose.vim'
 " NeoBundle
@@ -40,7 +37,7 @@ Plug 'kdheepak/lazygit.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'vim-airline/vim-airline'
 
-"Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
 "Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Markdown 
 "Plug 'davidgranstrom/nvim-markdown-preview'
@@ -52,7 +49,7 @@ set completeopt-=preview
 set autowrite
 "set ignorecase
 "set smartcase
-set updatetime=500
+set updatetime=50
 set timeoutlen=500
 set mmp=500
 set number
@@ -94,6 +91,7 @@ nnoremap <silent> <leader>gg :LazyGit<CR>
 let g:go_def_mode = 'gopls'
 let g:go_info_mode='gopls'
 
+syntax on
 let g:go_highlight_structs = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_functions = 1
@@ -118,6 +116,7 @@ if !exists("autocommands_loaded")
   autocmd BufWritePost *.go :GoBuild
 endif
 autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.organizeImport')
+autocmd BufWritePost *.go :syntax on 
 
 " Terminal
 let g:term_buf = 0
@@ -205,6 +204,7 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nnoremap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+nmap <leader>on :syntax on<CR>
 " Copy to clipboard
 "nnoremap <silent> YY :%y+<CR>
 "noremap y :*y
