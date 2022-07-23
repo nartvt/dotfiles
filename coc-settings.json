@@ -6,16 +6,12 @@
 			"rootPatterns": [
 				"go.mod",
 				".vim/",
-				".git/",
-				".hg/"
+				".git/"
 			],
 			"command": "gopls",
 			"trace.server": "verbose",
 			"filetypes": [
-				"go",
-				"javascript",
-				"typescript",
-				"json"
+				"go"
 			]
 		}
 	},
@@ -35,9 +31,7 @@
 	"coc.preferences.formatOnType": true,
 	"coc.source.around.enable": true,
 	"coc.preferences.formatOnSaveFiletypes": [
-		"dart",
 		"go",
-		"rust",
 		"markdown",
 		"javascript",
 		"typescript",
@@ -47,8 +41,7 @@
 	"suggest.autoTrigger": "always",
 	"suggest.triggerCompletionWait": 50,
 	"suggest.removeDuplicateItems": true,
-	"suggest.enablePreview": true,
-	"suggest.floatEnable": true,
-	"suggest.detailMaxLength": 100,
-	"suggest.detailField": "menu"
+	"suggest.detailField": "abbr",
+	"suggest.selection": "first",
+	"suggest.detailMaxLength": 500
 }
