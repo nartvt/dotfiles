@@ -38,7 +38,7 @@ Plug 'voldikss/vim-floaterm'
 Plug 'vim-airline/vim-airline'
 
 " Plug 'neovim/nvim-lspconfig'
-"Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Markdown 
 "Plug 'davidgranstrom/nvim-markdown-preview'
 
@@ -216,38 +216,6 @@ autocmd BufWritePre *.go :silent call CocAction('runCommand', 'editor.action.org
 autocmd BufWritePost *.go :syntax on
 autocmd BufWritePost *.go :set ft=go
 
-" Terminal, outdate
-
-" let g:term_buf = 0
-" let g:term_win = 0
-" function! TermToggle(height)
-"    if win_gotoid(g:term_win)
-"        hide
-"    else
-"        botright new
-"        exec "resize " . a:height
-"        try
-"            exec "buffer " . g:term_buf
-"        catch
-"            call termopen($SHELL, {"detach": 1})
-"            let g:term_buf = bufnr("")
-"            set nonumber
-"            set norelativenumber
-"            set signcolumn=no
-"        endtry
-"        startinsert!
-"        let g:term_win = win_getid()
-"    endif
-" endfunction
-
-" Toggle terminal on/off (neovim)
-"nnoremap <leader>xx :call TermToggle(20)<CR>
-
-"inoremap <leader>as <Esc>:call TermToggle(12)<CR>
-"tnoremap <A-t> <C-\><C-n>:call TermToggle(12)<CR>
-
-" Terminal go back to normal mode
-"tnoremap <leader>cx :<C-\><C-n> :q!<CR>
 
 " generator json tag for go struct
 nnoremap <silent><leader>fj :GoAddTags json<CR>
@@ -258,17 +226,11 @@ autocmd!
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif                                                                                                                    
 augroup END
     
-" DART
-" let g:dart_format_on_save = 1
-" let g:dart_style_guide = 0
-
-" FLUTTER
-" xmap <leader>a  <Plug>(coc-codeaction-selected)
-" nmap <leader>a  <Plug>(coc-codeaction-selected)
-
 
 " FZF
-let g:fzf_layout = { 'down': '100%'}
+
+" open full screen
+" let g:fzf_layout = { 'down': '100%', 'up': '100%'}
 
 " COMMAND
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--smart-case --color-path="0;33"', {'options': '--delimiter : --nth 4..'}, <bang>0)
@@ -292,7 +254,7 @@ nnoremap <silent> <Space><Space> :noh<CR>
 "nmap <leader>d :LSClientEnable<CR>:lopen<CR>
 "nmap <leader>dd :LSClientDisable<CR>:lclose<CR>
 nnoremap <silent><C-s> :w!<CR>
-nnoremap <leader>e :q!<CR>
+nnoremap <silent><leader>e :q!<CR>
 
 " Better window navigation ctrl+h,j,k,l instead of ctrl+w+h,j,k,l
 nnoremap <C-h> <C-w>h                                                                                                                                                                                                                                                                   
