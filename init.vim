@@ -57,6 +57,11 @@ set mmp=500
 set number
 set relativenumber
 
+" set options locally
+setlocal tabstop=4
+setlocal shiftwidth=4
+setlocal noexpandtab
+
 " Encoding                                                                                                                                                                                                                                                                           s
 set encoding=utf-8                                                                                                                                                                                                                                                                    
 set fileencoding=utf-8                  " The encoding written to file                                                                                                                                                                                                                
@@ -238,9 +243,9 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, '--smart-case --color-path=
 " inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<TAB>"
 " new coc config 0.0.82
 " TAB confirm auto config
-inoremap <silent><expr> <tab> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
+inoremap <silent><expr><tab> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<TAB>"
 " ENTER for confirm auto complete
-" inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-y>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>"
 " view current open files
 nnoremap <silent><leader>b :Buffers<CR>
 " MAP
