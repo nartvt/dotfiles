@@ -36,13 +36,19 @@ Plug 'rbgrouleff/bclose.vim'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'voldikss/vim-floaterm'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Plug 'neovim/nvim-lspconfig'
+
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Markdown 
 "Plug 'davidgranstrom/nvim-markdown-preview'
 
 " Plug 'OmniSharp/omnisharp-vim'
+Plug 'navarasu/onedark.nvim'
+
+Plug 'ryanoasis/vim-devicons'
+Plug 'adelarsq/vim-devicons-emoji'
 call plug#end()
 
 " BASIC
@@ -56,6 +62,10 @@ set timeoutlen=500
 set mmp=500
 set number
 set relativenumber
+
+" :AirlineTheme simple
+" https://github.com/vim-airline/vim-airline-themes/tree/master/autoload/airline/themes
+let g:airline_theme='deus'
 
 " set options locally
 setlocal tabstop=4
@@ -89,7 +99,7 @@ nmap <leader>r :NERDTreeFocus<cr>R<c-w><c-p>
 set clipboard+=unnamedplus
 
 " floaterm 
-let g:floaterm_keymap_toggle = '<leader>tf'
+let g:floaterm_keymap_toggle = '<leader>cc'
 let g:floaterm_keymap_new = '<leader>fo'
 let g:floaterm_keymap_prev = '<leader>fp'
 let g:floaterm_keymap_next = '<leader>fn'
@@ -301,7 +311,10 @@ nmap <silent><leader>so :so %<CR>
 let g:gruvbox_contrast_dark = 'soft'
 
 color gruvbox
-"color monokai
+
+" color onedark
+
+" color monokai
 set background=dark
 "set termguicolors
 "

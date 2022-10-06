@@ -13,6 +13,12 @@
 			"filetypes": [
 				"go"
 			]
+		},
+		"erlang": {
+			"command": "erlang_ls",
+			"filetypes": [
+				"erlang"
+			]
 		}
 	},
 	"diagnostic.level": "information",
@@ -33,6 +39,7 @@
 	"coc.preferences.formatOnSaveFiletypes": [
 		"go",
 		"markdown",
+		"erl",
 		"javascript",
 		"typescript",
 		"json",
