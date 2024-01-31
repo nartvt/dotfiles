@@ -1,0 +1,4 @@
+.backup/
+.undo/
+.backup/*
+.undo/*

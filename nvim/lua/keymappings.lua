@@ -32,17 +32,16 @@ vim.g.go_addtags_transform = 'snakecase' -- snakecase, camelcase
 remap("n", "<leader>fj", "<cmd>:GoAddTags json,omitempty bson,omitempty<Cr>", bufopts, "generation json tag")
 
 -- telescope
-remap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", bufopts, "Find file")
 remap("n", "<C-p>", "<cmd>:FZF!<cr>", bufopts, "Find file from current folfer")
--- remap("n", "<C-p>", "<cmd>Telescope find_files<cr>", bufopts, "Find file")
+remap("n", "<C-a>", "<cmd>Telescope find_files<cr>", bufopts, "Find file")
 remap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", bufopts, "Grep")
 remap("n", "<leader>bf", "<cmd>Telescope buffers<cr>", bufopts, "Find buffer")
 remap("n", "<leader>fm", "<cmd>Telescope marks<cr>", bufopts, "Find mark")
-remap("n", "<leader>fr", "<cmd>Telescope lsp_references<cr>", bufopts, "Find references (LSP)")
-remap("n", "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", bufopts, "Find symbols (LSP)")
-remap("n", "<leader>fc", "<cmd>Telescope lsp_incoming_calls<cr>", bufopts, "Find incoming calls (LSP)")
-remap("n", "<leader>fo", "<cmd>Telescope lsp_outgoing_calls<cr>", bufopts, "Find outgoing calls (LSP)")
-remap("n", "<leader>fi", "<cmd>Telescope lsp_implementations<cr>", bufopts, "Find implementations (LSP)")
+remap("n", "<C-x>"     , "<cmd>Telescope lsp_references<cr>", bufopts, "Find references in current folder (LSP)")
+remap("n", "<C-z>"     , "<cmd>Telescope lsp_document_symbols<cr>", bufopts, "Find symbols method in a current file (LSP)")
+remap("n", "<C-i>"     , "<cmd>Telescope lsp_incoming_calls<cr>", bufopts, "Find incoming calls in current file(LSP)")
+remap("n", "<leader>fo", "<cmd>Telescope lsp_outgoing_calls<cr>", bufopts, "Find outgoing calls from outside (LSP)")
+-- remap("n", "<leader>fi", "<cmd>Telescope lsp_implementations<cr>", bufopts, "Find implementations (LSP)")
 remap("n", "<leader>fx", "<cmd>Telescope diagnostics bufnr=0<cr>", bufopts, "Find errors (LSP)")
 require("which-key").register({
   f = {
