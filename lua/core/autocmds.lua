@@ -4,7 +4,7 @@
 
 -- Define autocommands with Lua APIs
 -- See: h:api-autocmd, h:augroup
-
+local vim = vim
 local augroup = vim.api.nvim_create_augroup       -- Create/get autocommand group
 local autocmd = vim.api.nvim_create_autocmd       -- Create autocommand
 local usercmd = vim.api.nvim_create_user_command   -- Create usercommand
