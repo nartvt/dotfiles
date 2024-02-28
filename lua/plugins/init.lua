@@ -45,6 +45,8 @@ return {
   'jiangmiao/auto-pairs',
   -- 'skanehira/docker-compose.vim',
   'ellisonleao/gruvbox.nvim',
+  'github/copilot.vim',
+  ' monsonjeremy/onedark.nvim',
 	{
 		'folke/trouble.nvim',
 		config = function()
@@ -53,6 +55,10 @@ return {
 			})
 		end
 	},
+  {
+  "mfussenegger/nvim-dap",
+  config = function() end,
+  },
 	{
 		'folke/which-key.nvim',
 		config = function()
@@ -80,10 +86,10 @@ return {
 		},
 		config = function() require('config/nvim-cmp') end,
 	},
-	{
-		'mfussenegger/nvim-dap',
-		config = function() require('config/nvim-dap') end,
-	},
+-- 	{
+-- 		'mfussenegger/nvim-dap',
+-- 		config = function() require('config/nvim-dap') end,
+-- 	},
 	{
 		'nvim-lualine/lualine.nvim',
 		config = function()
