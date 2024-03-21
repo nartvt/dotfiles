@@ -9,19 +9,37 @@ Install neovim >=0.9
 3. brew install pyright
 4. brew install neovim
 5. brew install lazygit
-6. brew install lua-language-server
-7. install lua 5.1
-8. brew install ltex-ls
-9. brew install typescript-language-server
-10. Install `goimports` for auto format go source and import on thefly
+6. install lazy vim: `https://www.lazyvim.org/installation`
+7. brew install lua-language-server
+8. install lua 5.1: `https://www.lua.org/ftp`
+9. brew install ltex-ls
+10. brew install typescript-language-server
+11. Install `goimports` for auto format go source and import on thefly
 - Open terminal and run:
   + `go install golang.org/x/tools/cmd/goimports@latest`
   + `go get golang.org/x/tools/gopls@latest`
-11. Clone this repo, copy all file at folder `dotfile` to
+12. Clone this repo, copy all file at folder `dotfile` to
    + `$HOME/.config/nvim/`
-12. install new plugin if any: `lua/plugins/init.lua`
-13. config new language server for language development:
+13. install new plugin if any: `lua/plugins/init.lua`
+14. config new language server for language development:
    + `lua/lsp/lspconfig.lua`:
+15. Install tig explorer
+  - brew install autoconf automake libtool
+  - clone repor install tig `https://jonas.github.io/tig/INSTALL.html`:
+  - brew install tig
+  - brew install pkg-config
+  - make configure
+  - ./configure
+  - make
+  - make install
+Error:
+```
+    INSTALL install: chmod 755 /usr/local/bin: Operation not permitted
+    src/tig -> /usr/local/bin
+    install: /usr/local/bin/tig: Permission denied
+    make: [install] Error 71
+```
+Resolved: `sudo make install`
 
 ### Coc
 1. brew install neovim
