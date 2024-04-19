@@ -2,18 +2,19 @@ local vim = vim
 
 local M = {}
 function M.golangHighlight()
-  vim.g.go_highlight_structs               = 1
-  vim.g.go_highlight_methods               = 1
-  vim.g.go_highlight_functions             = 1
-  vim.g.go_highlight_operators             = 1
-  vim.g.go_highlight_build_constraints     = 1
-  vim.g.go_highlight_function_calls        = 1
-  vim.g.go_highlight_fields                = 1
-  vim.g.go_highlight_variable_declarations = 0
-  vim.g.go_highlight_variable_assignments  = 1
-  vim.g.go_highlight_types                 = 1
-  vim.g.go_def_mode                        = 'gopls'
-  vim.g.go_info_mode                       = 'gopls'
+  local g = vim.g
+  g.go_highlight_structs               = 1
+  g.go_highlight_methods               = 1
+  g.go_highlight_functions             = 1
+  g.go_highlight_operators             = 1
+  g.go_highlight_build_constraints     = 1
+  g.go_highlight_function_calls        = 1
+  g.go_highlight_fields                = 1
+  g.go_highlight_variable_declarations = 0
+  g.go_highlight_variable_assignments  = 1
+  g.go_highlight_types                 = 1
+  g.go_def_mode                        = 'gopls'
+  g.go_info_mode                       = 'gopls'
 end
 
 function M.golangBuild()

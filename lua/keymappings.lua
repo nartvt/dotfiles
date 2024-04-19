@@ -1,8 +1,8 @@
+local remap = require("me.util").remap
 -----------------------------------------------------------
 -- Define keymaps of Neovim and installed plugins.
 -----------------------------------------------------------
-
-local remap = require("me.util").remap
+local vim = vim
 local bufopts = { silent = true, noremap = true }
 
 -- disable search highlighting by pressing enter
@@ -146,3 +146,4 @@ require("which-key").register({
 }, { prefix = "<leader>" })
 
 remap("n","<leader>pl","<cmd>:TigGrep<cr>", bufopts,"tig grep multi use")
+remap("n","<C-j>","<cmd>codeium#Chat()<cr>",bufopts,"Codeium chat")

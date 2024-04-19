@@ -11,6 +11,7 @@ util.baseSetting()
 util.disableProviderSupport()
 util.backup()
 util.unloadUnuseStuff()
+util.codeiumConfig()
 
 term.baseConfig()
 
@@ -20,3 +21,5 @@ golang.golangBuild()
 f.config()
 f.searchFzfCommand()
 f.findFileFromCurrentDirFzf()
+
+

@@ -1,3 +1,4 @@
+local vim = vim
 return {
   'spywhere/detect-language.nvim', -- Whose ls is it anyway?
 	'aklt/plantuml-syntax',
@@ -13,12 +14,11 @@ return {
 	'simrat39/symbols-outline.nvim',
 	'godlygeek/tabular',
 	'itspriddle/vim-marked',
-	-- 'ludovicchabant/vim-gutentags',
   'ixru/nvim-markdown',
 	'leafOfTree/vim-svelte-plugin',
   'wbthomason/packer.nvim',
 
--- 'mfussenegger/nvim-jdtls',
+'mfussenegger/nvim-jdtls',
 	'nvim-lua/plenary.nvim',
 	'tpope/vim-commentary',
 	'tpope/vim-fugitive',
@@ -26,7 +26,6 @@ return {
 	'tpope/vim-rhubarb',
 	'tpope/vim-surround',
 	'tpope/vim-unimpaired',
---	'tyru/open-browser.vim',
 	'andymass/vim-matchup',
 	'fatih/vim-go',
 	'kdheepak/lazygit.nvim',
@@ -45,8 +44,10 @@ return {
   'jiangmiao/auto-pairs',
   -- 'skanehira/docker-compose.vim',
   'ellisonleao/gruvbox.nvim',
-  'github/copilot.vim',
-  ' monsonjeremy/onedark.nvim',
+  'neoclide/coc-solargraph',
+'Exafunction/codeium.vim',
+   'vim-ruby/vim-ruby',
+  --   'github/copilot.vim',
 	{
 		'folke/trouble.nvim',
 		config = function()
