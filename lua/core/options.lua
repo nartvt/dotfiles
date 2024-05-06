@@ -19,7 +19,7 @@ golang.golangHighlight()
 golang.golangBuild()
 
 f.config()
-f.searchFzfCommand()
-f.findFileFromCurrentDirFzf()
+-- f.searchFzfCommand()
+-- f.findFileFromCurrentDirFzf()
 
 

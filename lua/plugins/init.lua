@@ -18,7 +18,7 @@ return {
 	'leafOfTree/vim-svelte-plugin',
   'wbthomason/packer.nvim',
 
-'mfussenegger/nvim-jdtls',
+-- 'mfussenegger/nvim-jdtls',
 	'nvim-lua/plenary.nvim',
 	'tpope/vim-commentary',
 	'tpope/vim-fugitive',
@@ -45,8 +45,14 @@ return {
   -- 'skanehira/docker-compose.vim',
   'ellisonleao/gruvbox.nvim',
   'neoclide/coc-solargraph',
-'Exafunction/codeium.vim',
+  'Exafunction/codeium.vim',
    'vim-ruby/vim-ruby',
+   {
+   'ahmedkhalf/lsp-rooter.nvim',
+  config = function()
+    require('lsp-rooter').setup()
+  end
+ },
   --   'github/copilot.vim',
 	{
 		'folke/trouble.nvim',
@@ -107,6 +113,11 @@ return {
 			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 			'nvim-telescope/telescope-ui-select.nvim',
 		},
+    pickers = {
+      search_history = {
+        theme = "dropdown",
+      }
+    },
 		config = function() require('config/telescope') end,
 	},
 	{
