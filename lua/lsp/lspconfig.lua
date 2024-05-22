@@ -1,11 +1,12 @@
 -- LSP Configuration
 local vim = vim
 local util = require("me.util")
+-- local remap = util.remap
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = require("lsp.common").on_attach
-local server_name = "tsserver"
+-- local server_name = "tsserver"
 local bin_name = "typescript-language-server"
 
 -- add completion capability
@@ -17,6 +18,43 @@ lspconfig['dartls'].setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 }
+
+
+require('java').setup()
+require('lspconfig').jdtls.setup({
+  on_attach = on_attach,
+  root_markers = {
+  'settings.gradle',
+  'settings.gradle.kts',
+  'pom.xml',
+  'build.gradle',
+  'mvnw',
+  'gradlew',
+  'build.gradle',
+  'build.gradle.kts',
+  '.git',
+ },
+
+ -- load java test plugins
+ java_test = {
+  enable = true,
+ },
+
+ -- load java debugger plugins
+ java_debug_adapter = {
+  enable = true,
+ },
+
+ jdk = {
+  -- install jdk using mason.nvim
+  auto_install = true,
+ },
+
+ notifications = {
+  -- enable 'Configuring DAP' & 'DAP configured' messages on start up
+  dap = true,
+ },
+})
 
 lspconfig['ltex'].setup {
 	on_attach = on_attach,
