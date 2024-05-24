@@ -27,33 +27,11 @@ return {
 	'tpope/vim-surround',
 	'tpope/vim-unimpaired',
 	'andymass/vim-matchup',
-	'fatih/vim-go',
-	'kdheepak/lazygit.nvim',
-	'junegunn/fzf',
-	'junegunn/fzf.vim',
-	'voldikss/vim-floaterm',
-	'vim-airline/vim-airline-themes',
-	'airblade/vim-gitgutter',
-	'tveskag/nvim-blame-line',
-	'iberianpig/tig-explorer.vim',
 	'rbgrouleff/bclose.vim',
-	'scrooloose/nerdTree',
-	'neovim/nvim-lspconfig',
-  'hrsh7th/cmp-nvim-lsp',
-  'natebosch/vim-lsc',
-  'jiangmiao/auto-pairs',
+	'jiangmiao/auto-pairs',
   -- 'skanehira/docker-compose.vim',
-  'ellisonleao/gruvbox.nvim',
   'neoclide/coc-solargraph',
-  'Exafunction/codeium.vim',
    'vim-ruby/vim-ruby',
-   {
-   'ahmedkhalf/lsp-rooter.nvim',
-  config = function()
-    require('lsp-rooter').setup()
-  end
- },
-  --   'github/copilot.vim',
 	{
 		'folke/trouble.nvim',
 		config = function()
@@ -62,28 +40,6 @@ return {
 			})
 		end
 	},
-  {
-  'nvim-java/nvim-java',
-  dependencies = {
-    'nvim-java/lua-async-await',
-    'nvim-java/nvim-java-refactor',
-    'nvim-java/nvim-java-core',
-    'nvim-java/nvim-java-test',
-    'nvim-java/nvim-java-dap',
-    'MunifTanjim/nui.nvim',
-    'neovim/nvim-lspconfig',
-    'mfussenegger/nvim-dap',
-    {
-      'williamboman/mason.nvim',
-      opts = {
-        registries = {
-          'github:nvim-java/mason-registry',
-          'github:mason-org/mason-registry',
-        },
-      },
-    }
-  },
-},
   {
   "mfussenegger/nvim-dap",
   config = function() end,
@@ -104,17 +60,6 @@ return {
 			require('alpha').setup(require 'alpha.themes.startify'.config)
 		end
 	},
-	{
-		'hrsh7th/nvim-cmp',
-    dependencies = {
-			'hrsh7th/cmp-nvim-lsp',
-			'hrsh7th/cmp-nvim-lsp-signature-help',
-			'hrsh7th/cmp-vsnip',
-      'hrsh7th/vim-vsnip',
-			'onsails/lspkind.nvim',
-		},
-		config = function() require('config/nvim-cmp') end,
-	},
 -- 	{
 -- 		'mfussenegger/nvim-dap',
 -- 		config = function() require('config/nvim-dap') end,
@@ -128,28 +73,8 @@ return {
 		end
 	},
 	{
-		'nvim-telescope/telescope.nvim',
-		branch = '0.1.x',
-		dependencies = {
-			'nvim-telescope/telescope-dap.nvim',
-			{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-			'nvim-telescope/telescope-ui-select.nvim',
-		},
-    pickers = {
-      search_history = {
-        theme = "dropdown",
-      }
-    },
-		config = function() require('config/telescope') end,
-	},
-	{
 		'nvim-tree/nvim-web-devicons'
 	},
-	{
-  'nvim-treesitter/nvim-treesitter',
-	    build = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-	    config = function() require('config/nvim-treesitter') end,
- },
  {
 		'simrat39/symbols-outline.nvim',
 		config = function()
