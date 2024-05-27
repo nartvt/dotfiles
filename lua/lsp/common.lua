@@ -1,7 +1,7 @@
 local vim = vim
 local util = require("me.util")
 local remap = util.remap
-local home = os.getenv('HOME')
+--local home = os.getenv('HOME')
 local M = {}
 
 local on_attach = function(_, bufnr)
@@ -26,9 +26,7 @@ local on_attach = function(_, bufnr)
   		{ noremap = true, silent = true, buffer = bufnr, desc = "Code actions" })
   	remap('n', '<C-r>', function() vim.lsp.buf.format { async = true } end, bufopts, "Format file")
 end
-local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
 M.on_attach = on_attach
-M.bufopts = bufopts
 
 return M

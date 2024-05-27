@@ -19,7 +19,6 @@ lspconfig['dartls'].setup {
 	capabilities = capabilities,
 }
 
-
 require('java').setup()
 require('lspconfig').jdtls.setup({
   on_attach = on_attach,
