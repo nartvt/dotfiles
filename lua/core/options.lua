@@ -2,7 +2,6 @@
 -- General Neovim settings and configuration
 -----------------------------------------------------------
 
-
 local util = require("core.util")
 util.baseSetting()
 util.disableProviderSupport()
@@ -23,6 +22,7 @@ java.JavaBuild()
 
 local f = require("core.fzf_func")
 f.config()
+
 -- f.searchFzfCommand()
 -- f.findFileFromCurrentDirFzf()
 

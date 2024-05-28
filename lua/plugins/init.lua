@@ -18,7 +18,6 @@ return {
 	'leafOfTree/vim-svelte-plugin',
   'wbthomason/packer.nvim',
 
--- 'mfussenegger/nvim-jdtls',
 	'nvim-lua/plenary.nvim',
 	'tpope/vim-commentary',
 	'tpope/vim-fugitive',
@@ -32,7 +31,7 @@ return {
   -- 'skanehira/docker-compose.vim',
   'neoclide/coc-solargraph',
    'vim-ruby/vim-ruby',
-	{
+   	{
 		'folke/trouble.nvim',
 		config = function()
 			require("trouble").setup({
@@ -71,9 +70,6 @@ return {
 				options = { theme = 'gruvbox' },
 			}
 		end
-	},
-	{
-		'nvim-tree/nvim-web-devicons'
 	},
  {
 		'simrat39/symbols-outline.nvim',

@@ -11,7 +11,7 @@ function M.JavaHighlight()
 end
 
 function M.JavaBuild()
-  local java_build = vim.api.nvim_create_augroup('java-build', { clear = true })
+  local java_build = vim.api.nvim_create_augroup('java-build-command', { clear = true })
   vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
   	pattern = '*.java',
   	group = java_build,

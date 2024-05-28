@@ -1,13 +1,14 @@
-local vim = vim
 local remap = require("me.util").remap
 -----------------------------------------------------------
 -- Define keymaps of Neovim and installed plugins.
------------------------------------------------------------local vim = vim
+-----------------------------------------------------------
+local vim = vim
 -- local bufopts = { silent = true, noremap = true }
 local bufopts = require("lsp.common").bufopts
 
 -- disable search highlighting by pressing enter
 remap("n", "<cr>", "<cmd>:nohlsearch<cr><cr>")
+remap("n", "<leader>b", "<cmd>:FineCmdline<cr>")
 
 -- tab management
 remap("n", "<C-Insert>", "<cmd>:tabnew<cr>", bufopts, "New tab")

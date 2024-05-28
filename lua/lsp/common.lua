@@ -1,7 +1,7 @@
 local vim = vim
 local util = require("me.util")
 local remap = util.remap
---local home = os.getenv('HOME')
+local home = os.getenv('HOME')
 local M = {}
 
 local on_attach = function(_, bufnr)
@@ -13,7 +13,7 @@ local on_attach = function(_, bufnr)
   	remap('n', 'gi', vim.lsp.buf.implementation, bufopts, "Go to implementation")
   	remap('n', 'gr', vim.lsp.buf.references, bufopts, "Go to references")
   	remap('n', 'hv', vim.lsp.buf.hover, bufopts, "Hover text")
-  	remap('n', '<C-l>', vim.lsp.diagnostic.show_line_diagnostics(), bufopts, "show line error")
+--  	remap('n', '<C-l>', vim.lsp.diagnostic.show_line_diagnostics(), bufopts, "show line error")
   	remap('n', '<C-k>', vim.lsp.buf.signature_help, bufopts, "Show signature")
   	remap('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts, "Add workspace folder")
   	remap('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts, "Remove workspace folder")
