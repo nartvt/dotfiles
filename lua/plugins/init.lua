@@ -28,6 +28,8 @@ return {
 	'andymass/vim-matchup',
 	'rbgrouleff/bclose.vim',
 	'jiangmiao/auto-pairs',
+  "Exafunction/codeium.nvim",
+--  'github/copilot.vim',
   -- 'skanehira/docker-compose.vim',
   'neoclide/coc-solargraph',
    'vim-ruby/vim-ruby',
@@ -39,10 +41,10 @@ return {
 			})
 		end
 	},
-  {
-  "mfussenegger/nvim-dap",
-  config = function() end,
-  },
+--   {
+--   "mfussenegger/nvim-dap",
+--   config = function() end,
+--   },
 	{
 		'folke/which-key.nvim',
 		config = function()
@@ -59,10 +61,10 @@ return {
 			require('alpha').setup(require 'alpha.themes.startify'.config)
 		end
 	},
--- 	{
--- 		'mfussenegger/nvim-dap',
--- 		config = function() require('config/nvim-dap') end,
--- 	},
+ 	{
+ 		'mfussenegger/nvim-dap',
+ 		config = function() require('config/nvim-dap') end,
+ 	},
 	{
 		'nvim-lualine/lualine.nvim',
 		config = function()

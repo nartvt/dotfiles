@@ -1,10 +1,11 @@
-local cmp = require 'cmp'
+local cmp = require('cmp')
 local lspkind = require('lspkind')
 cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
     { name = 'vsnip' },
+    {name =   'codeium'}
   },
   snippet = {
     expand = function(args)
@@ -40,6 +41,7 @@ cmp.setup {
       mode = 'symbol_text', -- show only symbol annotations
       maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+      symbol_map = { Codeium = "", }
     })
   }
 }

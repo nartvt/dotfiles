@@ -10,7 +10,7 @@ function M.golangHighlight()
   g.go_highlight_build_constraints     = 1
   g.go_highlight_function_calls        = 1
   g.go_highlight_fields                = 1
-  g.go_highlight_variable_declarations = 0
+  g.go_highlight_variable_declarations = 1
   g.go_highlight_variable_assignments  = 1
   g.go_highlight_types                 = 1
   g.go_def_mode                        = 'gopls'

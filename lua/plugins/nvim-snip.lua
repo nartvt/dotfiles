@@ -8,6 +8,6 @@ return {
         "onsails/lspkind.nvim"
     },
     config = function()
-        require("config/nvim-cmp")
+        require("config.nvim-cmp")
     end
 }

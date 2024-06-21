@@ -11,5 +11,5 @@ return {
         theme = "dropdown",
       }
     },
-		config = function() require('config/telescope') end,
+		config = function() require('config.telescope') end,
 }

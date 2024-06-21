@@ -125,3 +125,21 @@ lspconfig["lua_ls"].setup {
     on_attach = on_attach,
     capabilities = capabilities
 }
+
+lspconfig["metals"].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = {
+      "metals"
+    },
+    filetypes = {
+      "scala"
+    },
+    init_options = {
+        compilerOptions = {
+    snippetAutoIndent = false
+  },
+  isHttpEnabled = true,
+  statusBarProvider = "show-message"
+  }
+}

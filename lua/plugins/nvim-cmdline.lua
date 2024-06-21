@@ -25,5 +25,5 @@ return {
         { name = 'cmdline' }
       })
     })
-  end
+ end
 }
