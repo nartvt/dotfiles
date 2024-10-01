@@ -1,5 +1,6 @@
 return {
   'nvim-java/nvim-java',
+  'akhaku/vim-java-unused-imports',
   dependencies = {
     'nvim-java/lua-async-await',
     'nvim-java/nvim-java-refactor',

@@ -1,15 +1,17 @@
 -- Automatically install lazy.nvim if it does not exist
-local vim = vim
 local lazypath = vim.fn.stdpath("data") .. "/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
- vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+  local lazyRepo = "https://github.com/folke/lazy.nvim.git"
+ local out = vim.fn.system({"git", "clone", "--filter=blob:none", "--branch=stable", lazyRepo, lazypath})
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo ({
+        {"Failed to clone lazy.nvim: \n", "ErrMsg"},
+        {out, "WarningMsg"},
+        {"\nPress any key to exit..."},
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -29,11 +31,3 @@ vim.cmd [[
          silent! colorscheme gruvbox
          hi Normal guibg=#0a0a0a
  ]]
-
- vim.keymap.set('i', '<C-J>', 'copilot#Accept("\\<CR>")', {
-          expr = true,
-          replace_keycodes = false
-        })
-vim.g.copilot_no_tab_map = true
-vim.keymap.set('i', '<C-L>', '<Plug>(copilot-accept-word)')
-

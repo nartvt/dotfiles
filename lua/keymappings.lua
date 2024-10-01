@@ -3,8 +3,8 @@ local remap = require("me.util").remap
 -- Define keymaps of Neovim and installed plugins.
 -----------------------------------------------------------
 local vim = vim
--- local bufopts = { silent = true, noremap = true }
-local bufopts = require("lsp.common").bufopts
+local bufopts = { silent = true, noremap = true }
+-- local bufopts = require("lsp.common").bufopts
 
 -- disable search highlighting by pressing enter
 remap("n", "<cr>", "<cmd>:nohlsearch<cr><cr>")
@@ -23,8 +23,8 @@ remap("n", "<leader><leader>", "<cmd>:noh<cr>", bufopts, "No highlight")
 remap("n", "<leader>tg", "<cmd>:TigBlame<cr>", bufopts, "Git blame")
 remap("n", "<C-f>", "<cmd>:NERDTreeFind<cr>", bufopts, "Current file location")
 remap("n", "<C-n>", "<cmd>:NERDTreeToggle<cr>", bufopts, "Open left pannel")
---remap("n", "<leader>m", "<cmd>:History<cr>", bufopts, "History open recent files")
-remap("n", "<leader>m", "<cmd>:Telescope file_history history <cr>", bufopts, "History open recent files")
+remap("n", "<leader>m", "<cmd>:History<cr>", bufopts, "History open recent files")
+-- remap("n", "<leader>m", "<cmd>:Telescope file_history history <cr>", bufopts, "History open recent files")
 remap("n", "<C-h>", "<C-w>h", bufopts, "Jump to left")
 remap("n", "<C-j>", "<C-w>j", bufopts, "Jump to bottom")
 remap("n", "<C-k>", "<C-w>k", bufopts, "Jump to top")
@@ -46,11 +46,6 @@ remap("n", "<C-z>"     , "<cmd>Telescope lsp_document_symbols<cr>", bufopts, "Fi
 remap("n", "<C-i>"     , "<cmd>Telescope lsp_incoming_calls<cr>", bufopts, "Find incoming calls in current file(LSP)")
 remap("n", "<leader>fo", "<cmd>Telescope lsp_outgoing_calls<cr>", bufopts, "Find outgoing calls from outside (LSP)")
 remap("n", "<leader>fx", "<cmd>Telescope diagnostics bufnr=0<cr>", bufopts, "Find errors (LSP)")
-require("which-key").register({
-  f = {
-    name = "find",
-  },
-}, { prefix = "<leader>" })
 
 remap("n", "th", "<cmd>:tabfirst<cr>", bufopts, "First tab")
 remap("n", "tk", "<cmd>:tabnext<cr>", bufopts, "Next tab")
@@ -60,11 +55,6 @@ remap("n", "tt", "<cmd>:tabedit<cr>", bufopts, "New tab")
 remap("n", "td", "<cmd>:tabclose<cr>", bufopts, "Close tab")
 remap("n", "tn", "<cmd>:tabmove -1<cr>", bufopts, "Move tab next")
 remap("n", "tm", "<cmd>:tabmove +1<cr>", bufopts, "Move tab previous")
-require("which-key").register({
-  t = {
-    name = "tabs",
-  },
-})
 
 -- window management
 remap("n", "<C-S-Right>", "<cmd>:vertical resize -1<cr>", bufopts, "Minimize window")
@@ -90,11 +80,6 @@ remap("n", "<leader>qs", "<Plug>ReplaceWithStraight", bufopts, "Straighten quote
 remap("n", "<leader>xx", "<cmd>TroubleToggle<cr>", bufopts, "Display errors")
 remap("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", bufopts, "Display workspace errors")
 remap("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", bufopts, "Display document errors")
-require("which-key").register({
-  x = {
-    name = "errors",
-  },
-}, { prefix = "<leader>" })
 
 -- symbols-outline
 remap("n", "<leader>o", "<cmd>SymbolsOutline<cr>", bufopts, "Show symbols")
@@ -108,11 +93,6 @@ remap("n", "<leader>vf", "<cmd>TestFile<cr>", bufopts, "Test file")
 remap("n", "<leader>vs", "<cmd>TestSuite<cr>", bufopts, "Test suite")
 remap("n", "<leader>vl", "<cmd>TestLast<cr>", bufopts, "Test last")
 remap("n", "<leader>vg", "<cmd>TestVisit<cr>", bufopts, "Go to test")
-require("which-key").register({
-  v = {
-    name = "test",
-  },
-}, { prefix = "<leader>" })
 
 -- nvim-dap
 remap("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", bufopts, "Set breakpoint")
@@ -122,11 +102,6 @@ remap("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.
   bufopts, "Set log point")
 remap("n", "<leader>br", "<cmd>lua require'dap'.clear_breakpoints()<cr>", bufopts, "Clear breakpoints")
 remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "List breakpoints")
-require("which-key").register({
-  b = {
-    name = "breakpoints",
-  },
-}, { prefix = "<leader>" })
 
 remap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", bufopts, "Continue")
 remap("n", "<leader>dj", "<cmd>lua require'dap'.step_over()<cr>", bufopts, "Step over")
@@ -142,10 +117,5 @@ remap("n", "<leader>d?", function()
 end, bufopts, "Scopes")
 remap("n", "<leader>df", "<cmd>Telescope dap frames<cr>", bufopts, "List frames")
 remap("n", "<leader>dh", "<cmd>Telescope dap commands<cr>", bufopts, "List commands")
-require("which-key").register({
-  d = {
-    name = "debug",
-  },
-}, { prefix = "<leader>" })
 
 remap("n","<leader>pl","<cmd>:TigGrep<cr>", bufopts,"tig grep multi use")

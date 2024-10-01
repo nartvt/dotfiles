@@ -99,7 +99,8 @@ lspconfig["svelte"].setup {
     capabilities = capabilities
 }
 
-lspconfig["tsserver"].setup {
+-- lspconfig["tsserver"].setup {
+lspconfig["ts_ls"].setup {
     on_attach = on_attach,
     default_config = util.utf8_config {
         cmd = {bin_name, "--stdio"},
