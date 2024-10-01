@@ -69,7 +69,7 @@ function  M.baseSetting()
   opt.smartindent                      = true
   opt.expandtab                        = true -- expand tab to spaces
   opt.smarttab                         = true
-  vim.g.mapleader                          = " "
+  vim.g.mapleader                      = " "
 
   -- search
   opt.incsearch                        = true -- starts searching as soon as typing, without enter needed
