@@ -107,4 +107,17 @@ function M.codeiumConfig()
  -- g.codeium_filetypes = {"go","java"}
 end
 
+M.expand = function(fallback)
+  local luasnip = require('luasnip')
+  local suggestion = require('supermaven-nvim.completion_preview')
+
+  if luasnip.expandable() then
+    luasnip.expand()
+  elseif suggestion.has_suggestion() then
+    suggestion.on_accept_suggestion()
+  else
+    fallback()
+  end
+end
+
 return M

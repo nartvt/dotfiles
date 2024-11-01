@@ -13,7 +13,8 @@ util.baseSetting()
 util.disableProviderSupport()
 util.backup()
 util.unloadUnuseStuff()
-util.codeiumConfig()
+-- util.codeiumConfig()
+--util.expand()
 
 term.baseConfig()
 
@@ -28,4 +29,6 @@ f.config()
 -- f.searchFzfCommand()
 -- f.findFileFromCurrentDirFzf()
 
-
+-- local api = require("supermaven-nvim.api")
+-- api.start()
+-- api.restart()

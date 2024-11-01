@@ -32,5 +32,6 @@ return {
 	require("plugins.nvim-treesitter"),
 	require("plugins.nvim-trouble"),
 	require("plugins.nvim-which-key"),
-	require("plugins.nvim-wilder")
+	require("plugins.nvim-wilder"),
+  require("plugins.supermaven")
 }

@@ -1,4 +1,5 @@
 -- Automatically install lazy.nvim if it does not exist
+local vim = vim
 local lazypath = vim.fn.stdpath("data") .. "/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   local lazyRepo = "https://github.com/folke/lazy.nvim.git"
