@@ -32,7 +32,7 @@ remap("n", "<C-l>", "<C-w>l", bufopts, "Jump to right")
 remap("n", "<C-g>", "<cmd>:vsplit<cr>", bufopts, "vertical split")
 remap("n","<C-e>", "<cmd>:lua vim.diagnostic.open_float()<cr>",bufopts,"load error multiline")
 vim.g.go_addtags_transform = 'snakecase' -- snakecase, camelcase
-remap("n", "<leader>fj", "<cmd>:GoAddTags json,omitempty<Cr>", bufopts, "generation json tag")
+remap("n", "<leader>fj", "<cmd>:GoAddTags json,omitempty form<Cr>", bufopts, "generation json tag")
 
 -- telescope
 -- remap("n", "<C-p>", "<cmd>:FZF!<cr>", bufopts, "Find file from current folfer")
