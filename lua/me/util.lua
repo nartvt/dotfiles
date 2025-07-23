@@ -25,11 +25,11 @@ function M.map(mode, rhs, lhs, bufopts, desc)
 end
 
 M.default_config = {
-  log_level = lsp.protocol.MessageType.Warning;
-  message_level = lsp.protocol.MessageType.Warning;
-  settings = vim.empty_dict();
-  init_options = vim.empty_dict();
-  callbacks = {};
+  log_level = lsp.protocol.MessageType.Warning,
+  message_level = lsp.protocol.MessageType.Warning,
+  settings = vim.empty_dict(),
+  init_options = vim.empty_dict(),
+  callbacks = {},
 }
 
 function M.validate_bufnr(bufnr)
@@ -98,11 +98,11 @@ end
 
 function M.create_module_commands(module_name, commands)
   for command_name, def in pairs(commands) do
-    local parts = {"command!"}
+    local parts = { "command!" }
     -- Insert attributes.
     for k, v in pairs(def) do
       if type(k) == 'string' and type(v) == 'boolean' and v then
-        table.insert(parts, "-"..k)
+        table.insert(parts, "-" .. k)
       elseif type(k) == 'number' and type(v) == 'string' and v:match("^%-") then
         table.insert(parts, v)
       end
@@ -110,7 +110,7 @@ function M.create_module_commands(module_name, commands)
     table.insert(parts, command_name)
     -- The command definition.
     table.insert(parts,
-        string.format("lua require'nvim_lsp'[%q].commands[%q][1](<f-args>)", module_name, command_name))
+      string.format("lua require'nvim_lsp'[%q].commands[%q][1](<f-args>)", module_name, command_name))
     api.nvim_command(table.concat(parts, " "))
   end
 end
@@ -163,8 +163,8 @@ M.path = (function()
 
   local dirname
   do
-    local strip_dir_pat = path_sep.."([^"..path_sep.."]+)$"
-    local strip_sep_pat = path_sep.."$"
+    local strip_dir_pat = path_sep .. "([^" .. path_sep .. "]+)$"
+    local strip_sep_pat = path_sep .. "$"
     dirname = function(path)
       if not path then return end
       local result = path:gsub(strip_sep_pat, ""):gsub(strip_dir_pat, "")
@@ -177,8 +177,8 @@ M.path = (function()
 
   local function path_join(...)
     local result =
-      table.concat(
-        vim.tbl_flatten {...}, path_sep):gsub(path_sep.."+", path_sep)
+        table.concat(
+          vim.tbl_flatten { ... }, path_sep):gsub(path_sep .. "+", path_sep)
     return result
   end
 
@@ -226,16 +226,16 @@ M.path = (function()
   end
 
   return {
-    is_dir = is_dir;
-    is_file = is_file;
-    is_absolute = is_absolute;
-    exists = exists;
-    sep = path_sep;
-    dirname = dirname;
-    join = path_join;
-    traverse_parents = traverse_parents;
-    iterate_parents = iterate_parents;
-    is_descendant = is_descendant;
+    is_dir = is_dir,
+    is_file = is_file,
+    is_absolute = is_absolute,
+    exists = exists,
+    sep = path_sep,
+    dirname = dirname,
+    join = path_join,
+    traverse_parents = traverse_parents,
+    iterate_parents = iterate_parents,
+    is_descendant = is_descendant,
   }
 end)()
 
@@ -266,9 +266,13 @@ function M.server_per_root_dir_manager(_make_config)
   function manager.clients()
     local res = {}
     for _, id in pairs(clients) do
-      local client = lsp.get_client_by_id(id)
-      if client then
-        table.insert(res, client)
+      -- Use modern API instead of deprecated get_client_by_id
+      local all_clients = vim.lsp.get_clients()
+      for _, client in pairs(all_clients) do
+        if client.id == id then
+          table.insert(res, client)
+          break
+        end
       end
     end
     return res
@@ -278,7 +282,7 @@ function M.server_per_root_dir_manager(_make_config)
 end
 
 function M.search_ancestors(startpath, func)
-  validate { func = {func, 'f'} }
+  validate { func = { func, 'f' } }
   if func(startpath) then return startpath end
   for path in M.path.iterate_parents(startpath) do
     if func(path) then return path end
@@ -286,7 +290,7 @@ function M.search_ancestors(startpath, func)
 end
 
 function M.root_pattern(...)
-  local patterns = vim.tbl_flatten {...}
+  local patterns = vim.tbl_flatten { ... }
   local function matcher(path)
     for _, pattern in ipairs(patterns) do
       if M.path.exists(M.path.join(path, pattern)) then
@@ -298,6 +302,7 @@ function M.root_pattern(...)
     return M.search_ancestors(startpath, matcher)
   end
 end
+
 function M.find_git_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     if M.path.is_dir(M.path.join(path, ".git")) then
@@ -305,6 +310,7 @@ function M.find_git_ancestor(startpath)
     end
   end)
 end
+
 function M.find_node_modules_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     if M.path.is_dir(M.path.join(path, "node_modules")) then
@@ -312,6 +318,7 @@ function M.find_node_modules_ancestor(startpath)
     end
   end)
 end
+
 function M.find_package_json_ancestor(startpath)
   return M.search_ancestors(startpath, function(path)
     if M.path.is_file(M.path.join(path, "package.json")) then
@@ -346,10 +353,10 @@ local base_install_dir = M.path.join(fn.stdpath("cache"), "nvim_lsp")
 M.base_install_dir = base_install_dir
 function M.npm_installer(config)
   validate {
-    server_name = {config.server_name, 's'};
-    packages = {config.packages, validate_string_list, 'List of npm package names'};
-    binaries = {config.binaries, validate_string_list, 'List of binary names'};
-    post_install_script = {config.post_install_script, 's', true};
+    server_name = { config.server_name, 's' },
+    packages = { config.packages, validate_string_list, 'List of npm package names' },
+    binaries = { config.binaries, validate_string_list, 'List of binary names' },
+    post_install_script = { config.post_install_script, 's', true },
   }
 
   local install_dir = M.path.join(base_install_dir, config.server_name)
@@ -362,10 +369,10 @@ function M.npm_installer(config)
 
   local function get_install_info()
     return {
-      bin_dir = bin_dir;
-      install_dir = install_dir;
-      binaries = zip_lists_to_map(config.binaries, binary_paths);
-      is_installed = M.has_bins(unpack(binary_paths));
+      bin_dir = bin_dir,
+      install_dir = install_dir,
+      binaries = zip_lists_to_map(config.binaries, binary_paths),
+      is_installed = M.has_bins(unpack(binary_paths)),
     }
   end
 
@@ -382,9 +389,9 @@ function M.npm_installer(config)
       return print(config.server_name, "is already installed")
     end
     local install_params = {
-      packages = table.concat(config.packages, ' ');
-      install_dir = install_dir;
-      post_install_script = config.post_install_script or '';
+      packages = table.concat(config.packages, ' '),
+      install_dir = install_dir,
+      post_install_script = config.post_install_script or '',
     }
     local cmd = io.popen("sh", "w")
     local install_script = ([[
@@ -402,8 +409,8 @@ function M.npm_installer(config)
   end
 
   return {
-    install = install;
-    info = get_install_info;
+    install = install,
+    info = get_install_info,
   }
 end
 
@@ -419,15 +426,15 @@ function M.sh(script, cwd)
   -- luacheck: no unused
   local handle, pid
   handle, pid = uv.spawn("sh", {
-    stdio = {stdin, stdout, stderr};
-    cwd = cwd;
+    stdio = { stdin, stdout, stderr },
+    cwd = cwd,
   }, function()
     stdin:close()
     stdout:close()
     stderr:close()
     handle:close()
     vim.schedule(function()
-      api.nvim_command("silent bwipeout! "..bufnr)
+      api.nvim_command("silent bwipeout! " .. bufnr)
     end)
   end)
 
@@ -437,20 +444,20 @@ function M.sh(script, cwd)
       if not handle:is_closing() then
         handle:kill(15)
       end
-    end;
+    end,
   })
 
   local output_buf = ''
   local function update_chunk(err, chunk)
     if chunk then
-      output_buf = output_buf..chunk
+      output_buf = output_buf .. chunk
       local lines = vim.split(output_buf, '\n', true)
       api.nvim_buf_set_option(bufnr, "modifiable", true)
       api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
       api.nvim_buf_set_option(bufnr, "modifiable", false)
       api.nvim_buf_set_option(bufnr, "modified", false)
       if api.nvim_win_is_valid(winnr) then
-        api.nvim_win_set_cursor(winnr, {#lines, 0})
+        api.nvim_win_set_cursor(winnr, { #lines, 0 })
       end
     end
   end
@@ -465,18 +472,20 @@ end
 function M.format_vspackage_url(extension_name)
   local org, package = unpack(vim.split(extension_name, ".", true))
   assert(org and package)
-  return string.format("https://marketplace.visualstudio.com/_apis/public/gallery/publishers/%s/vsextensions/%s/latest/vspackage", org, package)
+  return string.format(
+  "https://marketplace.visualstudio.com/_apis/public/gallery/publishers/%s/vsextensions/%s/latest/vspackage", org,
+    package)
 end
-
 
 function M.utf8_config(config)
   config.capabilities = config.capabilities or lsp.protocol.make_client_capabilities()
-  config.capabilities.offsetEncoding = {"utf-8", "utf-16"}
+  config.capabilities.offsetEncoding = { "utf-8", "utf-16" }
   function config.on_init(client, result)
     if result.offsetEncoding then
       client.offset_encoding = result.offsetEncoding
     end
   end
+
   return config
 end
 
