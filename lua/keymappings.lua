@@ -18,73 +18,74 @@ remap("i", "<C-Delete>", "<cmd>:tabclose<cr>", bufopts, "Close tab")
 
 -- Enhanced tab behavior for code organization (works with nvim-cmp)
 vim.keymap.set("i", "<Tab>", function()
-  -- Check if nvim-cmp is available and completion menu is visible
-  local cmp_status, cmp = pcall(require, 'cmp')
-  if cmp_status and cmp.visible() then
-    cmp.select_next_item()
-    return
-  end
-  
-  local line = vim.api.nvim_get_current_line()
-  local col = vim.api.nvim_win_get_cursor(0)[2]
-  local before_cursor = line:sub(1, col)
-  
-  -- Check if we're inside brackets and need organization
-  local inside_brackets = before_cursor:match("[{%(%[]%s*$")
-  if inside_brackets then
-    -- We're right after opening bracket, provide proper indentation
-    local current_indent = line:match("^%s*")
-    local new_indent = current_indent .. string.rep(" ", 4)
-    local keys = vim.api.nvim_replace_termcodes("\n" .. new_indent .. "\n" .. current_indent .. "<Up><End>", true, false, true)
-    vim.api.nvim_feedkeys(keys, "n", false)
-    return
-  end
-  
-  -- Check if line needs more indentation (less than 4 spaces)
-  local indent = before_cursor:match("^%s*")
-  if #indent < 4 and before_cursor:match("^%s*$") then
-    local needed = 4 - #indent
-    local spaces = string.rep(" ", needed)
-    vim.api.nvim_feedkeys(spaces, "n", false)
-    return
-  end
-  
-  -- Default tab behavior (4 spaces)
-  vim.api.nvim_feedkeys("    ", "n", false)
+    -- Check if nvim-cmp is available and completion menu is visible
+    local cmp_status, cmp = pcall(require, 'cmp')
+    if cmp_status and cmp.visible() then
+        cmp.select_next_item()
+        return
+    end
+
+    local line = vim.api.nvim_get_current_line()
+    local col = vim.api.nvim_win_get_cursor(0)[2]
+    local before_cursor = line:sub(1, col)
+
+    -- Check if we're inside brackets and need organization
+    local inside_brackets = before_cursor:match("[{%(%[]%s*$")
+    if inside_brackets then
+        -- We're right after opening bracket, provide proper indentation
+        local current_indent = line:match("^%s*")
+        local new_indent = current_indent .. string.rep(" ", 4)
+        local keys = vim.api.nvim_replace_termcodes("\n" .. new_indent .. "\n" .. current_indent .. "<Up><End>", true,
+            false, true)
+        vim.api.nvim_feedkeys(keys, "n", false)
+        return
+    end
+
+    -- Check if line needs more indentation (less than 4 spaces)
+    local indent = before_cursor:match("^%s*")
+    if #indent < 4 and before_cursor:match("^%s*$") then
+        local needed = 4 - #indent
+        local spaces = string.rep(" ", needed)
+        vim.api.nvim_feedkeys(spaces, "n", false)
+        return
+    end
+
+    -- Default tab behavior (4 spaces)
+    vim.api.nvim_feedkeys("    ", "n", false)
 end, { desc = "Smart tab for code organization" })
 
 -- Shift+Tab for reverse indentation
 vim.keymap.set("i", "<S-Tab>", function()
-  local line = vim.api.nvim_get_current_line()
-  local col = vim.api.nvim_win_get_cursor(0)[2]
-  local before_cursor = line:sub(1, col)
-  
-  -- Remove 4 spaces if possible
-  if before_cursor:match("%s%s%s%s$") then
-    local keys = vim.api.nvim_replace_termcodes("<BS><BS><BS><BS>", true, false, true)
-    vim.api.nvim_feedkeys(keys, "n", false)
-  elseif before_cursor:match("%s+$") then
-    local keys = vim.api.nvim_replace_termcodes("<BS>", true, false, true)
-    vim.api.nvim_feedkeys(keys, "n", false)
-  else
-    local keys = vim.api.nvim_replace_termcodes("<BS>", true, false, true)
-    vim.api.nvim_feedkeys(keys, "n", false)
-  end
+    local line = vim.api.nvim_get_current_line()
+    local col = vim.api.nvim_win_get_cursor(0)[2]
+    local before_cursor = line:sub(1, col)
+
+    -- Remove 4 spaces if possible
+    if before_cursor:match("%s%s%s%s$") then
+        local keys = vim.api.nvim_replace_termcodes("<BS><BS><BS><BS>", true, false, true)
+        vim.api.nvim_feedkeys(keys, "n", false)
+    elseif before_cursor:match("%s+$") then
+        local keys = vim.api.nvim_replace_termcodes("<BS>", true, false, true)
+        vim.api.nvim_feedkeys(keys, "n", false)
+    else
+        local keys = vim.api.nvim_replace_termcodes("<BS>", true, false, true)
+        vim.api.nvim_feedkeys(keys, "n", false)
+    end
 end, { desc = "Reverse indent" })
 
 -- Normal mode tab for indenting selected text or current line
 remap("n", "<Tab>", function()
-  local line = vim.api.nvim_get_current_line()
-  local indent = line:match("^%s*")
-  
-  -- If line has less than 4 spaces, fix it
-  if #indent < 4 then
-    local needed = 4 - #indent
-    vim.api.nvim_set_current_line(string.rep(" ", needed) .. line:gsub("^%s*", ""))
-  else
-    -- Regular indent
-    vim.cmd("normal! >>")
-  end
+    local line = vim.api.nvim_get_current_line()
+    local indent = line:match("^%s*")
+
+    -- If line has less than 4 spaces, fix it
+    if #indent < 4 then
+        local needed = 4 - #indent
+        vim.api.nvim_set_current_line(string.rep(" ", needed) .. line:gsub("^%s*", ""))
+    else
+        -- Regular indent
+        vim.cmd("normal! >>")
+    end
 end, bufopts, "Indent line with 4-space minimum")
 
 -- Visual mode tab for indenting selection
@@ -175,9 +176,9 @@ remap("n", "<leader>vg", "<cmd>TestVisit<cr>", bufopts, "Go to test")
 -- nvim-dap
 remap("n", "<leader>bb", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", bufopts, "Set breakpoint")
 remap("n", "<leader>bc", "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<cr>", bufopts,
-  "Set conditional breakpoint")
+    "Set conditional breakpoint")
 remap("n", "<leader>bl", "<cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<cr>",
-  bufopts, "Set log point")
+    bufopts, "Set log point")
 remap("n", "<leader>br", "<cmd>lua require'dap'.clear_breakpoints()<cr>", bufopts, "Clear breakpoints")
 remap("n", "<leader>ba", "<cmd>Telescope dap list_breakpoints<cr>", bufopts, "List breakpoints")
 
@@ -191,7 +192,7 @@ remap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", bufopts, "Op
 remap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", bufopts, "Run last")
 remap("n", "<leader>di", function() require "dap.ui.widgets".hover() end, bufopts, "Variables")
 remap("n", "<leader>d?", function()
-  local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes)
+    local widgets = require "dap.ui.widgets"; widgets.centered_float(widgets.scopes)
 end, bufopts, "Scopes")
 remap("n", "<leader>df", "<cmd>Telescope dap frames<cr>", bufopts, "List frames")
 remap("n", "<leader>dh", "<cmd>Telescope dap commands<cr>", bufopts, "List commands")

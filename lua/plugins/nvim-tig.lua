@@ -1,4 +1,4 @@
 return {
-  'tveskag/nvim-blame-line',
-	'iberianpig/tig-explorer.vim',
+    'tveskag/nvim-blame-line',
+    'iberianpig/tig-explorer.vim',
 }
