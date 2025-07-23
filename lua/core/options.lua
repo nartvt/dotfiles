@@ -8,13 +8,12 @@ local golang =  require("core.go_func")
 local java =  require("core.java_func")
 local f = require("core.fzf_func")
 
+f.config()
 
 util.baseSetting()
 util.disableProviderSupport()
 util.backup()
 util.unloadUnuseStuff()
--- util.codeiumConfig()
---util.expand()
 
 term.baseConfig()
 
@@ -23,12 +22,9 @@ golang.golangBuild()
 
 java.JavaHighlight()
 java.JavaBuild()
+java.JavaSyntax()
+-- java.JavaDetect()
 
-f.config()
 
 -- f.searchFzfCommand()
 -- f.findFileFromCurrentDirFzf()
-
--- local api = require("supermaven-nvim.api")
--- api.start()
--- api.restart()

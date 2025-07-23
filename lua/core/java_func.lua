@@ -1,7 +1,6 @@
 local vim = vim
 
 local M = {}
-
 function M.JavaHighlight()
   local g = vim.g
   g.java_highlight_all = 1
@@ -22,6 +21,16 @@ function M.JavaBuild()
   	pattern = '*.java',
   	group = java_build,
   	command = 'UnusedImportsReset',
+  })
+end
+
+function M.JavaSyntax()
+  vim.api.nvim_create_autocmd({"BufRead", "BufNewFile"}, {
+    pattern = "*.java",
+    callback = function()
+      vim.bo.filetype = "java"
+      vim.bo.syntax = "java"
+    end,
   })
 end
 
