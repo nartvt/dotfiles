@@ -12,7 +12,6 @@ return {
     require("plugins.nvim-fzf"),
     require("plugins.nvim-git"),
     require("plugins.nvim-go"),
-    require("plugins.nvim-go"),
     require("plugins.nvim-java"),
     require("plugins.nvim-lsp"),
     require("plugins.nvim-lualine"),
