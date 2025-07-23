@@ -1,12 +1,11 @@
 return {
-	require("plugins.nvim-ai"),
+	require("plugins.nvim-supermaven"),
 	require("plugins.nvim-airline"),
 	require("plugins.nvim-alpha"),
 	require("plugins.nvim-cmdline"),
 	require("plugins.nvim-dap"),
 	require("plugins.nvim-detect-language"),
 	require("plugins.nvim-web-devicons"),
-	require("plugins.nvim-codeium"),
 	require("plugins.nvim-codesnap"),
 	require("plugins.nvim-common"),
 	require("plugins.nvim-floaterm"),
@@ -33,5 +32,4 @@ return {
 	require("plugins.nvim-trouble"),
 	require("plugins.nvim-which-key"),
 	require("plugins.nvim-wilder"),
-  require("plugins.supermaven")
 }
