@@ -16,6 +16,81 @@ remap("n", "<C-Delete>", "<cmd>:tabclose<cr>", bufopts, "Close tab")
 remap("i", "<C-Insert>", "<cmd>:tabnew<cr>", bufopts, "New tab")
 remap("i", "<C-Delete>", "<cmd>:tabclose<cr>", bufopts, "Close tab")
 
+-- Enhanced tab behavior for code organization (works with nvim-cmp)
+vim.keymap.set("i", "<Tab>", function()
+  -- Check if nvim-cmp is available and completion menu is visible
+  local cmp_status, cmp = pcall(require, 'cmp')
+  if cmp_status and cmp.visible() then
+    cmp.select_next_item()
+    return
+  end
+  
+  local line = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  local before_cursor = line:sub(1, col)
+  
+  -- Check if we're inside brackets and need organization
+  local inside_brackets = before_cursor:match("[{%(%[]%s*$")
+  if inside_brackets then
+    -- We're right after opening bracket, provide proper indentation
+    local current_indent = line:match("^%s*")
+    local new_indent = current_indent .. string.rep(" ", 4)
+    local keys = vim.api.nvim_replace_termcodes("\n" .. new_indent .. "\n" .. current_indent .. "<Up><End>", true, false, true)
+    vim.api.nvim_feedkeys(keys, "n", false)
+    return
+  end
+  
+  -- Check if line needs more indentation (less than 4 spaces)
+  local indent = before_cursor:match("^%s*")
+  if #indent < 4 and before_cursor:match("^%s*$") then
+    local needed = 4 - #indent
+    local spaces = string.rep(" ", needed)
+    vim.api.nvim_feedkeys(spaces, "n", false)
+    return
+  end
+  
+  -- Default tab behavior (4 spaces)
+  vim.api.nvim_feedkeys("    ", "n", false)
+end, { desc = "Smart tab for code organization" })
+
+-- Shift+Tab for reverse indentation
+vim.keymap.set("i", "<S-Tab>", function()
+  local line = vim.api.nvim_get_current_line()
+  local col = vim.api.nvim_win_get_cursor(0)[2]
+  local before_cursor = line:sub(1, col)
+  
+  -- Remove 4 spaces if possible
+  if before_cursor:match("%s%s%s%s$") then
+    local keys = vim.api.nvim_replace_termcodes("<BS><BS><BS><BS>", true, false, true)
+    vim.api.nvim_feedkeys(keys, "n", false)
+  elseif before_cursor:match("%s+$") then
+    local keys = vim.api.nvim_replace_termcodes("<BS>", true, false, true)
+    vim.api.nvim_feedkeys(keys, "n", false)
+  else
+    local keys = vim.api.nvim_replace_termcodes("<BS>", true, false, true)
+    vim.api.nvim_feedkeys(keys, "n", false)
+  end
+end, { desc = "Reverse indent" })
+
+-- Normal mode tab for indenting selected text or current line
+remap("n", "<Tab>", function()
+  local line = vim.api.nvim_get_current_line()
+  local indent = line:match("^%s*")
+  
+  -- If line has less than 4 spaces, fix it
+  if #indent < 4 then
+    local needed = 4 - #indent
+    vim.api.nvim_set_current_line(string.rep(" ", needed) .. line:gsub("^%s*", ""))
+  else
+    -- Regular indent
+    vim.cmd("normal! >>")
+  end
+end, bufopts, "Indent line with 4-space minimum")
+
+-- Visual mode tab for indenting selection
+remap("v", "<Tab>", ">gv", bufopts, "Indent selection")
+remap("v", "<S-Tab>", "<gv", bufopts, "Reverse indent selection")
+
 -- custom
 remap("n", "<C-s>", "<cmd>:w!<cr>", bufopts, "Save File")
 remap("n", "<C-q>", "<cmd>:q!<cr>", bufopts, "Quit File")
@@ -30,22 +105,25 @@ remap("n", "<C-j>", "<C-w>j", bufopts, "Jump to bottom")
 remap("n", "<C-k>", "<C-w>k", bufopts, "Jump to top")
 remap("n", "<C-l>", "<C-w>l", bufopts, "Jump to right")
 remap("n", "<C-g>", "<cmd>:vsplit<cr>", bufopts, "vertical split")
-remap("n","<C-e>", "<cmd>:lua vim.diagnostic.open_float()<cr>",bufopts,"load error multiline")
+remap("n", "<C-e>", "<cmd>:lua vim.diagnostic.open_float()<cr>", bufopts, "load error multiline")
 vim.g.go_addtags_transform = 'snakecase' -- snakecase, camelcase
-remap("n", "<leader>fj", "<cmd>:GoAddTags json,omitempty form<Cr>", bufopts, "generation json tag")
+remap("n", "<leader>fj", "<cmd>:GoAddTags json,omitempty<Cr>", bufopts, "generation json tag")
 
 -- telescope
--- remap("n", "<C-p>", "<cmd>:FZF!<cr>", bufopts, "Find file from current folfer")
+remap("n", "<leader>lc", "<cmd>:FZF!<cr>", bufopts, "Find file from current folfer")
 remap("n", "<C-a>", "<cmd>Telescope find_files<cr>", bufopts, "Find file")
 remap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", bufopts, "Grep")
 remap("n", "<leader>h", "<cmd>Telescope git_stash<cr>", bufopts, "Git Stash History")
 remap("n", "<leader>bf", "<cmd>Telescope buffers<cr>", bufopts, "Find buffer")
 remap("n", "<leader>fm", "<cmd>Telescope marks<cr>", bufopts, "Find mark")
-remap("n", "<C-x>"     , "<cmd>Telescope lsp_references<cr>", bufopts, "Find references in current folder (LSP)")
-remap("n", "<C-z>"     , "<cmd>Telescope lsp_document_symbols<cr>", bufopts, "Find symbols method in a current file (LSP)")
-remap("n", "<C-i>"     , "<cmd>Telescope lsp_incoming_calls<cr>", bufopts, "Find incoming calls in current file(LSP)")
+remap("n", "<C-x>", "<cmd>Telescope lsp_references<cr>", bufopts, "Find references in current folder (LSP)")
+remap("n", "<C-z>", "<cmd>Telescope lsp_document_symbols<cr>", bufopts, "Find symbols method in a current file (LSP)")
+remap("n", "<C-i>", "<cmd>Telescope lsp_incoming_calls<cr>", bufopts, "Find incoming calls in current file(LSP)")
 remap("n", "<leader>fo", "<cmd>Telescope lsp_outgoing_calls<cr>", bufopts, "Find outgoing calls from outside (LSP)")
 remap("n", "<leader>fx", "<cmd>Telescope diagnostics bufnr=0<cr>", bufopts, "Find errors (LSP)")
+
+-- floaterm (fixed conflict with Java extract constant)
+remap("n", "<leader>ft", "<cmd>:FloatermToggle<cr>", bufopts, "Toggle float terminal")
 
 remap("n", "th", "<cmd>:tabfirst<cr>", bufopts, "First tab")
 remap("n", "tk", "<cmd>:tabnext<cr>", bufopts, "Next tab")
@@ -118,4 +196,4 @@ end, bufopts, "Scopes")
 remap("n", "<leader>df", "<cmd>Telescope dap frames<cr>", bufopts, "List frames")
 remap("n", "<leader>dh", "<cmd>Telescope dap commands<cr>", bufopts, "List commands")
 
-remap("n","<leader>pl","<cmd>:TigGrep<cr>", bufopts,"tig grep multi use")
+remap("n", "<leader>pl", "<cmd>:TigGrep<cr>", bufopts, "tig grep multi use")
